@@ -35,7 +35,7 @@ shadow_enabled = true
 shape = SubResource("WorldBoundaryShape3D_dp200")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=499535993]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -0.026783943, 0.039709806, -0.02595377)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("PlaneMesh_6n322")
 
 [node name="Player" parent="." unique_id=1788691120 instance=ExtResource("1_nnsk1")]
