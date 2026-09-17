@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var camera_mount: Node3D = $CameraMount
+@onready var camera_mount: SpringArm3D = $SpringArmPivot/SpringArm3D
 @onready var animation_player: AnimationPlayer = $Visuals/mixamo_base/AnimationPlayer
 @onready var visuals: Node3D = $Visuals
 
@@ -17,16 +17,12 @@ var running = false
 @export var sensVertical = 0.25
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-func _input(event):
-	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * sensHorizontal))
-		visuals.rotate_y(deg_to_rad(event.relative. x* sensHorizontal))
-		camera_mount.rotate_x(deg_to_rad(-event.relative.y * sensVertical))
+	pass
 
 func _physics_process(delta: float) -> void:
-	
+	player_movement(delta)
+
+func player_movement(delta):
 	if Input.is_action_pressed("run"):
 		Speed = RunningSpeed
 		running = true
@@ -63,5 +59,6 @@ func _physics_process(delta: float) -> void:
 			animation_player.play("idle")
 		velocity.x = move_toward(velocity.x, 0, Speed)
 		velocity.z = move_toward(velocity.z, 0, Speed)
+	direction = direction.rotated(Vector3.UP, SpringArm3D.global_rotation.y) # !!! BROKEN - IS SUPOSED TO MAKE PLAYER TURN WITH MOUSE MOVEMENT/CAMERA MOVEMENT !!!
 
 	move_and_slide()
